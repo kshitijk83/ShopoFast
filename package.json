@@ -1,0 +1,27 @@
+{
+  "name": "paracticing-men-mongo-express-node-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kshitijk83/paracticing-MEN-mongo-express-node-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kshitijk83/paracticing-MEN-mongo-express-node-/issues"
+  },
+  "homepage": "https://github.com/kshitijk83/paracticing-MEN-mongo-express-node-#readme"
+}
