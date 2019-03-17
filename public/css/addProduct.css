@@ -1,0 +1,29 @@
+.form-control {
+    margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input{
+    display: block;
+}
+
+.form-control input {
+    border: 1px solid #df9e12;
+    font: inherit;
+    border-radius: 2px;
+}
+
+button{
+    font: inherit;
+    border: 1px solid #df9e12;
+    background: white;
+    border-radius: 3px;
+    color: #df9e12;
+    cursor: pointer;
+}
+
+button:hover,
+button:active{
+    background-color: #7700ff;
+    color: white;
+}
