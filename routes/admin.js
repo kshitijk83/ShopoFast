@@ -3,13 +3,18 @@ const path = require('path');
 const router = express.Router();
 const rootDir = require('../utility/path');
 
+var data = [];
+
 router.get('/add-product', (req, res, next)=>{
-    res.sendFile(path.join(rootDir, 'views', 'addProduct.html'));
+    res.render('addProduct', { title: 'Add Product', pageTitle: 'ADD PRODUCT', path: '/admin/add-product' });
 });
 
 router.post('/add-product', (req, res, next)=>{
-    console.log(req.body);
+    // console.log(req.body);
+    data.push({ title: req.body.title });
     res.redirect('/');
 });
 
-module.exports = router;
+// module.exports = router;
+exports.routes = router;
+exports.data = data;
