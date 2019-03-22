@@ -1,8 +1,8 @@
-<%- include('partials/head.ejs') %>
+<%- include('../partials/head.ejs') %>
     <link rel="stylesheet" type="text/css" media="screen" href="/css/product.css">
 </head>
 <body>
-    <%- include('partials/navigation.ejs') %>
+    <%- include('../partials/navigation.ejs') %>
 
     <main>
         <% if(prods.length>0){ %>
@@ -14,11 +14,13 @@
                 </header>
                 <div class="card__image"><img src="https://cdn.pixabay.com/photo/2017/06/02/10/36/flower-2365910_960_720.jpg" alt="image"></div>
                 <div class="card__content">
-                    <h2 class="product__price">$19.99</h2>
-                    <p class="product__description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Itaque rem quis maxime omnis quae, facilis harum labore perferendis inventore voluptatibus neque nobis unde odit vel blanditiis voluptatum molestias consequatur atque.</p>
+                    <h2 class="product__price"><%= prod.price %></h2>
+                    <p class="product__description"><%= prod.desc %></p>
                 </div>
                 <div class="card__actions">
-                    <button class="btn">Add to cart</button>
+                    <form method="POST" action="/add-to-cart">
+                        <button class="btn">Add to cart</button>
+                    </form>
                 </div>
             </article>
             <%}%>
@@ -27,4 +29,4 @@
         <h1>No Products</h1>
         <%}%>
     </main>
-<%- include('partials/end.ejs') %>
+<%- include('../partials/end.ejs') %>

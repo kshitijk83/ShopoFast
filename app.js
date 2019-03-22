@@ -9,7 +9,6 @@ const shopRoutes = require('./routes/shop');
 const errorControllers = require('./controllers/error');
 
 // UTILITY
-const rootDir = require('./utility/path');
 
 const app = express();
 

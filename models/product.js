@@ -13,8 +13,11 @@ getProductsFromFile=(cb)=>{
 }
 
 module.exports = class Product{
-    constructor(t){
-        this.title = t;
+    constructor(title, imageUrl, desc, price){
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.desc = desc;
+        this.price = price;
     }
 
     save(){
@@ -24,16 +27,7 @@ module.exports = class Product{
             fs.writeFile(p, JSON.stringify(products), err=>{
                 console.log(err);
             });
-        })
-        
-    //     fs.readFile(p, (err, content)=>{
-    //         let products=[];
-    //         if(!err){
-    //             products = JSON.parse(content);
-    //         }
-    //         products.push(this);
-    //         fs.writeFile(p, JSON.stringify(products));
-    // });
+        });
 }
 
     static fetchAll(cb){

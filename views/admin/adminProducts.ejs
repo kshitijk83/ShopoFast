@@ -1,0 +1,33 @@
+<%- include('../partials/head.ejs') %>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/product.css">
+</head>
+<body>
+    <%- include('../partials/navigation.ejs') %>
+
+    <main>
+        <% if(prods.length>0){ %>
+        <div class="grid">
+            <% for(let prod of prods){%>
+            <article class="card product-item">
+                <header class="card__header">
+                    <h1 class="product__title"><%= prod.title %></h1>
+                </header>
+                <div class="card__image"><img src="https://cdn.pixabay.com/photo/2017/06/02/10/36/flower-2365910_960_720.jpg" alt="image"></div>
+                <div class="card__content">
+                    <h2 class="product__price"><%= prod.price %></h2>
+                    <p class="product__description"><%= prod.desc %></p>
+                </div>
+                <div class="card__actions">
+                    <button class="btn" onclick='document.location.href="/admin/edit-product"'>Edit</button>
+                    <form method="POST" action='/admin/delete-product'>
+                        <button class="btn">Delete</button>
+                    </form>
+                </div>
+            </article>
+            <%}%>
+        </div>
+        <% } else{ %>
+        <h1>No Products</h1>
+        <%}%>
+    </main>
+<%- include('../partials/end.ejs') %>
