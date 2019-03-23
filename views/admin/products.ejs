@@ -26,7 +26,13 @@
                                         <%= product.description %>
                                     </p>
                                 </div>
-                                <%- include('../includes/add-to-cart', { product: product }) %>
+                                <div class="card__actions">
+                                    <a href="/admin/edit-product" class="btn">Edit</a>
+                                    <form action="/admin/delete-product" method="POST">
+                                        <button class="btn" type="submit">Delete</button>
+                                    </form>
+
+                                </div>
                             </article>
                             <% } %>
                     </div>
