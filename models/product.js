@@ -45,4 +45,21 @@ module.exports = class Product {
       cb(product);
     });
   }
+
+  static updateById(id, title, imageUrl, description, price, cb){
+    let all;
+    this.fetchAll(products=>{
+      all = [...products];
+      const index = all.findIndex(p=>p.id==id);
+      const product = all[index];
+      product.title = title;
+      product.imageUrl = imageUrl;
+      product.description = description;
+      product.price = price;
+      cb(product);
+      fs.writeFile(p, JSON.stringify(all), err=>{
+        console.log(err);
+      })
+    });
+  }
 };
