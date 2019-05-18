@@ -10,7 +10,20 @@ class User {
     }
 
     addToCart(product){
-        const updatedCart = {items: [{productId: new mongoDb.ObjectId(product._id), quantity: 1}]};
+        const cartItemIndex = this.cart.items.findIndex(
+            prod=> prod.productId.toString()===product._id.toString()
+        );
+
+        let updateCartItems=[...this.cart.items];
+        let nQuantity=1;
+        if(cartItemIndex>=0){
+            nQuantity=this.cart.items[cartItemIndex].quantity+1;
+            updateCartItems[cartItemIndex].quantity=nQuantity;
+        } else{
+            updateCartItems.push({productId: new mongoDb.ObjectId(product._id), quantity: nQuantity});
+        }
+
+        const updatedCart = {items: updateCartItems};
         let db = getdb();
         return db.collection('users').updateOne({_id: this._id},{
             $set: {cart: updatedCart}
