@@ -9,6 +9,68 @@ class User {
         this._id =id;
     }
 
+    getOrders(){
+        let db = getdb();
+        return db.collection('orders').find({'user._id': new mongoDb.ObjectId(this._id)}).toArray();
+    }
+
+    createOrder(){
+        let db = getdb();
+        return this.getCart()
+        .then(products=>{
+            const order = {
+                items: products,
+                user: {
+                    _id: new mongoDb.ObjectId(this._id),
+                    password: this.password
+                }
+            }
+            return db.collection('orders').insertOne(order)
+            .then(result=>{
+                this.cart.items=[];
+                return db.collection('users').updateOne(
+                    {_id:this._id},
+                    {$set:{cart: {items: []}}}
+                )
+            })
+        })
+    }
+
+    deleteCart(id){
+        let db = getdb();
+        const updatedCart = this.cart.items.filter(p=>{
+            return p.productId.toString()!==id.toString();
+        })
+
+        return db.collection('users').updateOne({_id: this._id},{
+            $set: {cart:{items: updatedCart}}
+        }).then(result=>{
+            console.log(result);
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+    getCart(){
+        let db = getdb();
+        const productIds = this.cart.items.map(p=>{
+            return p.productId;
+        })
+        return db.collection('products').find({_id: {$in: productIds}}).toArray()
+        .then(products=>{
+            return products.map(p=>{
+                return {
+                    ...p,
+                    quantity: this.cart.items.find(i=>{
+                        return i.productId.toString()===p._id.toString();
+                    }).quantity
+                }
+            })
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
     addToCart(product){
         const cartItemIndex = this.cart.items.findIndex(
             prod=> prod.productId.toString()===product._id.toString()
